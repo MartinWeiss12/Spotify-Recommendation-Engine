@@ -38,7 +38,7 @@ print('Unique songs before dropping ones in common with my top streams:', len(sp
 #			spotifyData.drop([i], axis = 0, inplace = True)
 #
 #spotifyData.reset_index(inplace = True, drop = True)
-#spotifyData.to_excel(f'{outputPath}/uriCleanedSpotifyData.xlsx', index = False)
+#spotifyData.to_excel(f'{outputPath}uriCleanedSpotifyData.xlsx', index = False)
 
 spotifyData = pd.read_excel(r'Spotify/uriCleanedSpotifyData.xlsx')
 print('Songs after dropping ones in common with my top streams:', len(spotifyData))
