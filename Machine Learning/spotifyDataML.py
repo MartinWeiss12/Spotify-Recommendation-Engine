@@ -31,14 +31,16 @@ myData = myData[myData.Streams >= 25] #keeping songs with over 25 streams
 myDataUriList = myData['URI']
 print('Unique songs before dropping ones in common with my top streams:', len(spotifyData))
 
-# only need to run once. cleaned data is sent to excel after first run
-#for i in range (len(spotifyDataUriList)):
-#	for j in range (len(myDataUriList)):
-#		if (myDataUriList[j] == spotifyDataUriList[i]):
-#			spotifyData.drop([i], axis = 0, inplace = True)
-#
-#spotifyData.reset_index(inplace = True, drop = True)
-#spotifyData.to_excel(f'{outputPath}/uriCleanedSpotifyData.xlsx', index = False)
+# Only need to run once. Cleaned data is sent to excel after first run.
+'''
+for i in range (len(spotifyDataUriList)):
+	for j in range (len(myDataUriList)):
+		if (myDataUriList[j] == spotifyDataUriList[i]):
+			spotifyData.drop([i], axis = 0, inplace = True)
+
+spotifyData.reset_index(inplace = True, drop = True)
+spotifyData.to_excel(f'{outputPath}/uriCleanedSpotifyData.xlsx', index = False)
+'''
 
 spotifyData = pd.read_excel(r'Spotify/uriCleanedSpotifyData.xlsx')
 print('Songs after dropping ones in common with my top streams:', len(spotifyData))
@@ -111,16 +113,16 @@ playlists = sp.user_playlists(username)
 myPlaylistUris = [playlist['id'] for playlist in playlists['items']]
 myPlaylistNames = [playlist['name'] for playlist in playlists['items']]
 playlistsDf = pd.DataFrame({'URI': myPlaylistUris, 'Name': myPlaylistNames})
-playlist_id = [playlistsDf['URI'][i] for i in range (len(playlistsDf)) if (playlistsDf['Name'][i] == mlPlaylistName)][0]
+playlistID = [playlistsDf['URI'][i] for i in range (len(playlistsDf)) if (playlistsDf['Name'][i] == mlPlaylistName)][0]
 
 count = 0
 mlMadePlaylist = []
 while count < len(newUris):
-	mlMadePlaylist += sp.user_playlist_add_tracks(username, playlist_id, tracks = newUris[count:count + 50])
+	mlMadePlaylist += sp.user_playlist_add_tracks(username, playlistID, tracks = newUris[count:count + 50])
 	count += 50
 
-#Mean accuracy score from training:  0.9335411583988436
-#R2: 0.907462249414215
-#Accuracy on test y_test and prediction: 0.9973624054861966
-#MAE: 0.0026375945138034113
-#Number of recommend songs: 161
+# Mean accuracy score from training:  0.9335411583988436
+# R2: 0.907462249414215
+# Accuracy on test y_test and prediction: 0.9973624054861966
+# MAE: 0.0026375945138034113
+# Number of recommend songs: 161
