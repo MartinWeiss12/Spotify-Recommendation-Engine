@@ -90,7 +90,7 @@ print('MAE:', mean_absolute_error(y_test, dtPrediction))
 
 print('Now using entire Spotify data set.')
 predictionProbabilities = dtc.predict_proba(spotifyData.drop(['URI','My Top Stream'], axis = 1))
-threshold = 0.075 #higher = less songs, lower = more songs
+threshold = 0.50 #higher = less songs, lower = more songs
 songPredictions = [1 if predictionProbabilities[i][1] > threshold else 0 for i in range(len(predictionProbabilities))]
 spotifyData['Recommended Song'] = songPredictions
 print('Number of recommend songs:', songPredictions.count(1))
@@ -121,7 +121,7 @@ while count < len(newUris):
 	mlMadePlaylist += sp.user_playlist_add_tracks(username, playlistID, tracks = newUris[count:count + 50])
 	count += 50
 
-# Mean accuracy score from training:  0.9335411583988436
+# Mean accuracy score from training: 0.9335411583988436
 # R2: 0.907462249414215
 # Accuracy on test y_test and prediction: 0.9973624054861966
 # MAE: 0.0026375945138034113
