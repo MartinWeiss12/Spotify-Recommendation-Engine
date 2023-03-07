@@ -21,9 +21,9 @@ start_time = datetime.now()
 start_time = start_time.strftime("%H:%M:%S")
 print('Start Time:', start_time)
 
-myData = pd.read_excel(r'/Users/martinweiss/Documents/Python/Random Python Scripts/Spotify/mySongData.xlsx')
-spotifyData = pd.read_excel(r'/Users/martinweiss/Documents/Python/Random Python Scripts/Spotify/spotifyPlaylistSongData55k.xlsx')
-outputPath = r'/Users/martinweiss/Documents/Python/Random Python Scripts/Spotify'
+myData = pd.read_excel(r'')
+spotifyData = pd.read_excel(r'')
+outputPath = r''
 
 spotifyDataUriList = spotifyData['URI']
 myData = myData[myData.Streams >= 25] #keeping songs with over 25 streams
@@ -31,7 +31,7 @@ myData = myData[myData.Streams >= 25] #keeping songs with over 25 streams
 myDataUriList = myData['URI']
 print('Unique songs before dropping ones in common with my top streams:', len(spotifyData))
 
-#only need to run once. cleaned data is sent to excel after first run
+# only need to run once. cleaned data is sent to excel after first run
 #for i in range (len(spotifyDataUriList)):
 #	for j in range (len(myDataUriList)):
 #		if (myDataUriList[j] == spotifyDataUriList[i]):
@@ -96,7 +96,7 @@ newUris = [spotifyData['URI'][i] for i in range (len(spotifyData)) if spotifyDat
 
 cid = ''
 secret = ''
-username = 'thatboymart'
+username = ''
 redirect_uri = 'http://localhost:8888/callback'
 scope = 'user-top-read playlist-modify-private playlist-modify-public'
 token = util.prompt_for_user_token(username, scope, client_id = cid, client_secret = secret, redirect_uri = redirect_uri)
@@ -105,7 +105,7 @@ if token:
 	sp = spotipy.Spotify(auth = token)
 
 mlPlaylistName = 'Python Machine Learning Made Playlist'
-makePlaylist = sp.user_playlist_create(username, mlPlaylistName, description = 'This playlist was made by my Python machine learning algorithm and populated with the Spotify API. ')
+makePlaylist = sp.user_playlist_create(username, mlPlaylistName, description = 'This playlist was made by my Python machine learning algorithm and populated with the Spotify API.')
 
 playlists = sp.user_playlists(username)
 myPlaylistUris = [playlist['id'] for playlist in playlists['items']]
