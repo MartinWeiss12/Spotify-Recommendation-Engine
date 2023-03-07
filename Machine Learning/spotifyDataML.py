@@ -21,9 +21,9 @@ start_time = datetime.now()
 start_time = start_time.strftime("%H:%M:%S")
 print('Start Time:', start_time)
 
-myData = pd.read_excel(r'')
-spotifyData = pd.read_excel(r'')
-outputPath = r''
+myData = pd.read_excel(r'Spotify/mySongData.xlsx')
+spotifyData = pd.read_excel(r'Spotify/spotifyPlaylistSongData55k.xlsx')
+outputPath = r'Spotify/'
 
 spotifyDataUriList = spotifyData['URI']
 myData = myData[myData.Streams >= 25] #keeping songs with over 25 streams
@@ -40,7 +40,7 @@ print('Unique songs before dropping ones in common with my top streams:', len(sp
 #spotifyData.reset_index(inplace = True, drop = True)
 #spotifyData.to_excel(f'{outputPath}/uriCleanedSpotifyData.xlsx', index = False)
 
-spotifyData = pd.read_excel(r'/Users/martinweiss/Documents/Python/Random Python Scripts/Spotify/uriCleanedSpotifyData.xlsx')
+spotifyData = pd.read_excel(r'Spotify/uriCleanedSpotifyData.xlsx')
 print('Songs after dropping ones in common with my top streams:', len(spotifyData))
 
 myTopStream = [1 for i in range(len(myData))]
